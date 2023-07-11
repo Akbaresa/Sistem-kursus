@@ -6,10 +6,7 @@ import view.DashboardPage;
 import view.HomePage;
 import view.homepageview.LoginPage;
 
-import java.util.ArrayList;
-
 public class SiswaController {
-
 
     public Peserta getData(int index) {
         return ModelObject.siswa.getPeserta(index);
@@ -20,33 +17,29 @@ public class SiswaController {
     }
 
     public void reg(String nama, String alamat, String noTelp, String password, String mdl, String jdwl, String kls) {
-        int npm = 0;
-        ModelObject.siswa.insert(new Peserta(nama, alamat, noTelp, password, mdl, jdwl, kls, ModelObject.siswa.jumlah_data_array_peserta()+1));
+        ModelObject.siswa.insert(new Peserta(nama, alamat, noTelp, password, mdl, jdwl, kls,
+                ModelObject.siswa.jumlah_data_array_peserta() + 1));
     }
 
-    public void proses_login(int npm, String password)
-    {
+    public void proses_login(int npm, String password) {
         int status = 0;
 
-        for (int perulangan = 0; perulangan < ModelObject.siswa.jumlah_data_array_peserta(); perulangan++)
-        {
-            if ((ModelObject.siswa.getPeserta(perulangan).getNpm() == npm) && (ModelObject.siswa.getPeserta(perulangan).getPass().equals(password)))
-            {
+        for (int perulangan = 0; perulangan < ModelObject.siswa.jumlah_data_array_peserta(); perulangan++) {
+            if ((ModelObject.siswa.getPeserta(perulangan).getNpm() == npm)
+                    && (ModelObject.siswa.getPeserta(perulangan).getPass().equals(password))) {
                 status = 1;
             }
         }
 
-        if (status == 1)
-        {
+        if (status == 1) {
             System.out.println("selamat datang ");
             new DashboardPage().dashboard();
-        }
-        else
-        {
+        } else {
             loginGagal();
             new LoginPage().login();
         }
     }
+
     private void loginGagal() {
         System.out.println("-------------------------------");
         System.out.println("----------LOGIN GAGAL----------");
